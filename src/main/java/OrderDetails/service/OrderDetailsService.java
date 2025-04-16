@@ -1,7 +1,6 @@
 package OrderDetails.service;
 
 import OrderDetails.dto.OrderDetailsDTO;
-import OrderDetails.model.OrderDetailsModel;
 import OrderDetails.repository.OrderDetailsRepository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -18,22 +17,31 @@ public class OrderDetailsService {
     }
 
     public OrderDetailsDTO getOrderDetailsByOrderId(int id) {
-        OrderDetailsModel orderDetailsModel = orderDetailsRepository.getOrderDetailsByOrderId(id);
-        return new OrderDetailsDTO(orderDetailsModel);
+        return new OrderDetailsDTO(orderDetailsRepository.getOrderDetailsByOrderId(id));
     }
 
     public OrderDetailsDTO getOrderDetailsByCustomerId(int customerId) {
-        OrderDetailsModel orderDetailsModel =  orderDetailsRepository.getOrderDetailsByCustomerId(customerId);
-        return new OrderDetailsDTO(orderDetailsModel);
+        return new OrderDetailsDTO(orderDetailsRepository.getOrderDetailsByCustomerId(customerId));
     }
 
     public OrderDetailsDTO createOrderDetails(int customerId) {
-        OrderDetailsModel orderDetailsModel = orderDetailsRepository.createOrderDetails(customerId);
-        return new OrderDetailsDTO(orderDetailsModel);
+        return new OrderDetailsDTO(orderDetailsRepository.createOrderDetails(customerId));
     }
 
     public OrderDetailsDTO deleteOrderDetails(int id) {
-        OrderDetailsModel orderDetailsModel = orderDetailsRepository.deleteOrderDetails(id);
-        return new OrderDetailsDTO(orderDetailsModel);
+        return new OrderDetailsDTO(orderDetailsRepository.deleteOrderDetails(id));
     }
+
+    public OrderDetailsDTO updateOrderDetails(int id, float total, int customerId) {
+        return new OrderDetailsDTO(orderDetailsRepository.updateOrderDetails(id, total, customerId));
+    }
+
+    public OrderDetailsDTO deleteOrderDetailsByCustomerId(int customerId) {
+        return new OrderDetailsDTO(orderDetailsRepository.deleteOrderDetailsByCustomerId(customerId));
+    }
+
+    public OrderDetailsDTO updateOrderDetailsByCustomerId(int customerId, float total) {
+        return new OrderDetailsDTO(orderDetailsRepository.updateOrderDetailsByCustomerId(customerId, total));
+    }
+
 }
