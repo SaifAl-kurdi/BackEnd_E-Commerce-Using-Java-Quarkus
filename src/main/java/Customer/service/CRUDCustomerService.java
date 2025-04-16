@@ -16,7 +16,6 @@ public class CRUDCustomerService {
 
     public List<CustomerDTO> findAll() {
         List<CustomerModel> list = crudCustomerRepository.findAll();
-//        return list.stream().map(customer -> new CustomerDTO(customer)).collect(Collectors.toList());
         return list.stream().map(CustomerDTO::new).collect(Collectors.toList());
     }
 

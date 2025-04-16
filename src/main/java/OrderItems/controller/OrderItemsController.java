@@ -25,16 +25,22 @@ public class OrderItemsController {
         return orderItemsService.getOrderItemsModel();
     }
 
-    // Here should get the data based on the order ID.
+    @GET
+    @Path("orderItemsById")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public OrderItemsDTO getAllOrderItemsByCustomerId(@QueryParam("id") int customerId) {
+        return orderItemsService.getOrderItemsById(customerId);
+    }
 
-    // In this function I should return specific things.
     @GET
     @Path("theItemsByCustomerId")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public List<Object[]> getOrderItemsModelByCustomerId(@QueryParam("customerId") int CustomerId) {
-        return orderItemsService.getOrderItemsModelByCustomerId(CustomerId);
+    public List<Object[]> getOrderItemsModelByCustomerId(@QueryParam("customerId") int customerId) {
+        return orderItemsService.getOrderItemsModelByCustomerId(customerId);
     }
 
     @POST
@@ -50,10 +56,35 @@ public class OrderItemsController {
         return orderItemsService.makeOrderItemsDTO(quantity, productId, orderDetailsId);
     }
 
-    // Here should Delete the data based on the order ID.
+    @DELETE
+    @Path("deleteOrderItemsById")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public OrderItemsDTO deleteOrderItemsById(@QueryParam("id") int id) {
+        return orderItemsService.deleteOrderItemsById(id);
+    }
 
-    // Here should Update the data based on the order ID.
+    @DELETE
+    @Path("deleteOrderItemsByOrderDetailsId")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public List<OrderItemsDTO> deleteOrderItemsByOrderDetailsId(@QueryParam("orderDetailsId") int id) {
+        return orderItemsService.deleteOrderItemsByOrderDetailsId(id);
+    }
 
-
-
+    @PUT
+    @Path("updateOrderItemsById")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public OrderItemsDTO updateOrderItemsById(
+            @QueryParam("id") int id,
+            @QueryParam("quantity") int quantity,
+            @QueryParam("productId") int productId,
+            @QueryParam("orderDetailsId") int orderDetailsId
+    ) {
+       return orderItemsService.updateOrderItemsById(id, quantity, productId, orderDetailsId);
+    }
 }

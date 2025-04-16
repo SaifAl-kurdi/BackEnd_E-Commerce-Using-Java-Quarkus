@@ -19,6 +19,10 @@ public class OrderItemsService {
         return orderItemsModel.stream().map(OrderItemsDTO::new).collect(Collectors.toList());
     }
 
+    public OrderItemsDTO getOrderItemsById(int id) {
+        return new OrderItemsDTO (orderItemsRepository.getOrderItemsById(id));
+    }
+
     public List<Object[]> getOrderItemsModelByCustomerId(int CustomerId) {
         return orderItemsRepository.getOrderItemsModelByCustomerId(CustomerId);
     }
@@ -28,5 +32,16 @@ public class OrderItemsService {
         return new OrderItemsDTO(orderItemsModel);
     }
 
+    public OrderItemsDTO deleteOrderItemsById(int id) {
+        return new OrderItemsDTO(orderItemsRepository.deleteOrderItemsById(id));
+    }
 
+    public List<OrderItemsDTO> deleteOrderItemsByOrderDetailsId(int orderDetailsId) {
+        List<OrderItemsModel> orderItemsModelList =  orderItemsRepository.deleteOrderItemsByOrderDetailsId(orderDetailsId);
+        return orderItemsModelList.stream().map(OrderItemsDTO::new).collect(Collectors.toList());
+    }
+
+    public OrderItemsDTO updateOrderItemsById(int id, int quantity, int productId, int orderDetailsId) {
+        return new OrderItemsDTO(orderItemsRepository.updateOrderItemsById(id, quantity, productId, orderDetailsId));
+    }
 }

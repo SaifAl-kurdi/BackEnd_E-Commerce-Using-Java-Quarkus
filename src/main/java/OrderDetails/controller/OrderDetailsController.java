@@ -51,6 +51,7 @@ public class OrderDetailsController {
         return orderDetailsService.createOrderDetails(customerId);
     }
 
+
     @DELETE
     @Path("deleteOrderDetails")
     @Transactional
@@ -60,11 +61,34 @@ public class OrderDetailsController {
         return orderDetailsService.deleteOrderDetails(id);
     }
 
-    // I want to make a study, if there is should delete based on the customer ID.
+    @DELETE
+    @Path("deleteOrderDetailsByCustomerId")
+    @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public OrderDetailsDTO deleteOrderDetailsByCustomerId(@QueryParam("customerId") int customerId) {
+        return orderDetailsService.deleteOrderDetailsByCustomerId(customerId);
+    }
 
-    // Here should I update on the order details.
+    @PUT
+    @Path("updateOrderDet")
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public OrderDetailsDTO updateOrderDetails(
+            @QueryParam("orderId") int orderId,
+            @QueryParam("total") float total,
+            @QueryParam("customerId") int customerId
+            ) {
+        return orderDetailsService.updateOrderDetails(orderId, total, customerId);
+    }
 
-    // I want to make a study, if there is should I update based on the customer ID.
-
-
+    @PUT
+    @Path("updateOrderDetByCustomerId")
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public OrderDetailsDTO updateOrderDetailsByCustomerId(@QueryParam("customerId") int customerId, @QueryParam("total") float total) {
+        return orderDetailsService.updateOrderDetailsByCustomerId(customerId, total);
+    }
 }

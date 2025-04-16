@@ -53,9 +53,21 @@ public class OrderDetailsRepository {
                 "where c.id = :customerId", OrderDetailsModel.class).setParameter("customerId", customerId).getSingleResult();
     }
 
-    // Here should send list of data like product ID not just onse.
+
+    public OrderDetailsModel updateOrderDetails(int orderId, float total, int customerId) {
+        OrderDetailsModel orderDetailsModel = getOrderDetailsByOrderId(orderId);
+        orderDetailsModel.setTotalPrice(total);
+        if (customerId != 0 && customerId != -1) {
+            CustomerModel customerModel = entityManager.find(CustomerModel.class, customerId);
+            orderDetailsModel.setCustomer(customerModel);
+        }
+        entityManager.merge(orderDetailsModel);
+        return orderDetailsModel;
+    }
+
     public OrderDetailsModel createOrderDetails(int customerId) {
         OrderDetailsModel orderDetailsModel = new OrderDetailsModel();
+
         List<Object[]> orderDetails = entityManager.createQuery("select cart.quantity, p.price, cart.customerModel.id, " +
                         "p.id from CartModel cart Join " +
                         "CustomerModel c On cart.customerModel.id = c.id " +
@@ -129,8 +141,7 @@ public class OrderDetailsRepository {
         OrderDetailsModel orderDetailsModel = getOrderDetailsByOrderId(orderDetailId);
 
         List<Integer> orderItemsIds = entityManager.createQuery("SELECT oi.id from OrderItemsModel oi Join OrderDetailsModel od On od.id = oi.orderDetails.id " +
-                "where oi.id = :orderDetailId", Integer.class).setParameter("orderDetailId", orderDetailId).getResultList();
-
+                "where oi.orderDetails.id = :orderDetailId", Integer.class).setParameter("orderDetailId", orderDetailId).getResultList();
         for (Integer orderItemId : orderItemsIds) {
             OrderItemsModel orderItem = entityManager.find(OrderItemsModel.class, orderItemId);
             if (orderItem != null) {
@@ -140,7 +151,6 @@ public class OrderDetailsRepository {
 
         List<Integer> invoiceId = entityManager.createQuery("SELECT iv.id from InvoiceModel iv Join OrderDetailsModel od On od.id = iv.orderDetailsModel.id " +
                 "where od.id = :orderDetailId", Integer.class).setParameter("orderDetailId", orderDetailId).getResultList();
-
         for (Integer invoiceId1 : invoiceId) {
             InvoiceModel invoice = entityManager.find(InvoiceModel.class, invoiceId1);
             if (invoice != null) {
@@ -149,6 +159,42 @@ public class OrderDetailsRepository {
         }
 
         entityManager.remove(orderDetailsModel);
+        return orderDetailsModel;
+    }
+
+    public OrderDetailsModel deleteOrderDetailsByCustomerId(int customerId) {
+        OrderDetailsModel orderDetailsModel = getOrderDetailsByCustomerId(customerId);
+
+        int orderDetailId = entityManager.createQuery("select od.id From OrderDetailsModel od " +
+                "join CustomerModel c on od.customer.id = c.id where " +
+                "c.id = :customerId", Integer.class).setParameter("customerId", customerId).getSingleResult();
+
+        List<Integer> orderItemsIds = entityManager.createQuery("SELECT oi.id from OrderItemsModel oi Join OrderDetailsModel od On od.id = oi.orderDetails.id " +
+                "where od.id = :orderDetailId", Integer.class).setParameter("orderDetailId", orderDetailId).getResultList();
+        for (Integer orderItemId : orderItemsIds) {
+            OrderItemsModel orderItem = entityManager.find(OrderItemsModel.class, orderItemId);
+            if (orderItem != null) {
+                entityManager.remove(orderItem);
+            }
+        }
+
+        List<Integer> invoiceId = entityManager.createQuery("SELECT iv.id from InvoiceModel iv Join OrderDetailsModel od On od.id = iv.orderDetailsModel.id " +
+                "where od.id = :orderDetailId", Integer.class).setParameter("orderDetailId", orderDetailId).getResultList();
+        for (Integer invoiceId1 : invoiceId) {
+            InvoiceModel invoice = entityManager.find(InvoiceModel.class, invoiceId1);
+            if (invoice != null) {
+                entityManager.remove(invoice);
+            }
+        }
+
+        entityManager.remove(orderDetailsModel);
+        return orderDetailsModel;
+    }
+
+    public OrderDetailsModel updateOrderDetailsByCustomerId(int customerId, double total) {
+        OrderDetailsModel orderDetailsModel = getOrderDetailsByCustomerId(customerId);
+        orderDetailsModel.setTotalPrice(total);
+        entityManager.merge(orderDetailsModel);
         return orderDetailsModel;
     }
 }

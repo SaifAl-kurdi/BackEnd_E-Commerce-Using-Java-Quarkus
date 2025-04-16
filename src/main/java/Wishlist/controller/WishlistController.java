@@ -73,5 +73,4 @@ public class WishlistController {
             ) {
         return wishlistService.deleteWishlistByCustomerIdAndProductId(deleteByCustomerId, deleteByProductId);
     }
-
 }

@@ -43,5 +43,4 @@ public class CategoryService {
         CategoryModel categoryModel = categoryRepository.updateCategoryById(id, name);
         return new CategoryDTO(categoryModel);
     }
-
 }

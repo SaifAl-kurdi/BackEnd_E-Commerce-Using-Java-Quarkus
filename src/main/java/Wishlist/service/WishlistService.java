@@ -42,6 +42,4 @@ public class WishlistService {
         WishlistModel wishlistModel = wishlistRepository.deleteWishlistByCustomerIdAndProductId(productId, customerId);
         return new WishlistDTO(wishlistModel);
     }
-
-
 }

@@ -35,8 +35,10 @@ public class ProductRepository {
         productModel.setDescription(description);
         productModel.setPrice(price);
         productModel.setStock(stock);
+
         CategoryModel categoryModel =entityManager.getReference(CategoryModel.class, categoryId);
         productModel.setCategory(categoryModel);
+
         entityManager.persist(productModel);
         return productModel;
     }

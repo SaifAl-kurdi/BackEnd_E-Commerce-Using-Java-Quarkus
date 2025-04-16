@@ -2,9 +2,7 @@ package Cart.dto;
 
 import Cart.model.CartModel;
 import Customer.dto.CustomerDTO;
-import Customer.model.CustomerModel;
 import Product.dto.ProductDTO;
-import Product.model.ProductModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,4 +27,3 @@ public class CartDTO {
         }
     }
 }
-

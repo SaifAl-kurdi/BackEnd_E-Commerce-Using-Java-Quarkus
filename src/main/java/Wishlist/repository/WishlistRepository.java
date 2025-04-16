@@ -2,7 +2,6 @@ package Wishlist.repository;
 
 import Customer.model.CustomerModel;
 import Product.model.ProductModel;
-import Wishlist.dto.WishlistDTO;
 import Wishlist.model.WishlistModel;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -56,14 +55,12 @@ public class WishlistRepository {
         return entityManager.getReference(ProductModel.class, productId);
     }
 
-    // For Admin
     public WishlistModel deleteWishlistById (int id) {
         WishlistModel wishlistModel = getWishlistModelById(id);
         entityManager.remove(wishlistModel);
         return wishlistModel;
     }
 
-    // For Client
     public WishlistModel deleteWishlistByCustomerIdAndProductId(int customerId, int productId) {
         WishlistModel wishlistModel = entityManager.createQuery("SELECT w from WishlistModel w where w.customerID.id = :customerId AND w.productID.id = :productId", WishlistModel.class)
                 .setParameter("customerId", customerId)

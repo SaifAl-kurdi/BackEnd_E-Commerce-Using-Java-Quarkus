@@ -69,6 +69,4 @@ public class CategoryController {
             @QueryParam("name") String name) {
         return categoryService.updateCategoryById(id, name);
     }
-
-
 }
