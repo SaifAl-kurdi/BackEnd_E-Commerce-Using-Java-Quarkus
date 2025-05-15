@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+	<Customers>
+		<Customer>	
+			<firstName>Saif</firstName>			
+			<lastName>Alkurdi</lastName>
+			<email>saif.kurdi@outlook.sa</email>			
+			<address>Tla Ali</address>			
+			<phoneNumber>0796644710</phoneNumber>			
+		</Customer>
+		<Customer>	
+			<firstName>Sanad</firstName>			
+			<lastName>Alkurdi</lastName>
+			<email>Sanad.kurdi@outlook.com</email>			
+			<address>Abdon</address>			
+			<phoneNumber>0791199827</phoneNumber>			
+		</Customer>
+		<Customer>	
+			<firstName>Ali</firstName>			
+			<lastName>Abu Hijleh</lastName>
+			<email>ali.hijleh@hotmal.com</email>			
+			<address>Abdon</address>			
+			<phoneNumber>0791400197</phoneNumber>			
+		</Customer>
+		<Customer>	
+			<firstName>Hamzah</firstName>			
+			<lastName>Abu hijleh</lastName>
+			<email>Hamzah.hijleh@icloud.com</email>			
+			<address>Airport Street</address>			
+			<phoneNumber>0792641721</phoneNumber>			
+		</Customer>
+	</Customers>		
+	

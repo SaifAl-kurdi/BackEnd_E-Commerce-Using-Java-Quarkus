@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+	<Products>
+		<Product>	
+			<Name>Iphone 7</Name>			
+			<SKU>8273878232</SKU>
+			<Description>Made on China</Description>			
+			<Price>726</Price>			
+			<Stock>721</Stock>
+			<Category_Id>1</Category_Id>
+		</Product>
+		<Product>	
+			<Name>Iphone 8</Name>			
+			<SKU>8273878412</SKU>
+			<Description>Made on China</Description>			
+			<Price>820</Price>			
+			<Stock>410</Stock>
+			<Category_Id>2</Category_Id>			
+		</Product>
+		<Product>	
+			<Name>Iphone X</Name>			
+			<SKU>8273878421</SKU>
+			<Description>Made on China</Description>			
+			<Price>850</Price>			
+			<Stock>201</Stock>
+			<Category_Id>1</Category_Id>			
+		</Product>
+		<Product>	
+			<Name>Iphone 12</Name>			
+			<SKU>8273878999</SKU>
+			<Description>Made on China</Description>			
+			<Price>925</Price>			
+			<Stock>194</Stock>
+			<Category_Id>2</Category_Id>			
+		</Product>
+	</Products>		
+	
